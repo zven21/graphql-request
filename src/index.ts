@@ -225,10 +225,11 @@ async function makeRequest<T = any, V = Variables>({
     return { ...result, headers, status }
   } else {
     const errorResult = typeof result === 'string' ? { error: result } : result
-    throw new ClientError(
-      { ...errorResult, status: response.status, headers: response.headers },
-      { query, variables }
-    )
+    return { ...errorResult, status: response.status, headers: response.headers }
+    // throw new ClientError(
+    //   { ...errorResult, status: response.status, headers: response.headers },
+    //   { query, variables }
+    // )
   }
 }
 
